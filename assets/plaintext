@@ -1,0 +1,16 @@
+myapp/
+
+|-- assets/
+|   |-- styles.css
+|   |-- custom-script.js
+|-- myapp/
+|   |-- __init__.py
+|   |-- dash_apps.py
+|   |-- urls.py
+|   |-- views.py
+|-- myproject/
+|   |-- __init__.py
+|   |-- settings.py
+|   |-- urls.py
+|   |-- wsgi.py
+|-- manage.py
