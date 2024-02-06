@@ -4,8 +4,10 @@ from dash.dependencies import Output, Input, State
 import dash_bootstrap_components as dbc
 import plotly.express as px
 import plotly.graph_objects as go
-import dash_daq as daq
+from gtts import gTTS
 import pandas as pd
+#from chatterbot import ChatBot
+import base64
 from dash import callback
 
 # Importing and cleaning of dataset
@@ -55,8 +57,15 @@ sector_card = dbc.Card(
             multi=False,
             options=[{'label': x, 'value': x} for x in sorted(df['sector'].unique())],
             style={'color': 'black'}
-        )
-    ], className='me-1 mpwdt-5 px-3')
+        ),
+        dcc.Textarea(id='user-input',
+                     placeholder='Ask a question...', rows=4, className='mb-6'),
+        html.Button("SUBMIT", id='ask_button', n_clicks=0, className='btn btn-primary mx-2'),
+        html.Button("", id='voice-button', n_clicks=0, className='btn btn-secondary'),
+        html.Div(id='Output-Area', className='mt-3')
+
+
+    ], className='me-1  px-3')
 )
 
 indicator_card = dbc.Card(
@@ -232,7 +241,7 @@ def update_geographical_distribution(selected_sector):
                              hover_data=['country', 'region', 'LocationName', 'names'],
                              title = f'Geographical Distribution of Loan For {selected_sector}',
                              mapbox_style= 'open-street-map',
-                             zoom = 0.7
+                             zoom = 2
                              )
     return fig3
 
